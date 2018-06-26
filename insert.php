@@ -1,7 +1,7 @@
 <?php
 
 
-	
+	include_once "registartion.html";
 	$conn = new mysqli("localhost", "root", "set123", "accounts");
 	
 	if ($conn->connect_error){
@@ -16,7 +16,7 @@
 			$username = $conn->real_escape_string($_POST['username']);
 			
 			$email = $conn->real_escape_string($_POST['email']);
-			$password = md5($_POST['password']); 
+			$password = crypt($_POST['password']); 
 			
 			
 			
@@ -26,7 +26,7 @@
 					
 			
 			if ($conn->query($sql) === TRUE) {
-			    echo "New record created successfully";
+			    header("Location: login.html");
 			} 
 			else {
 				echo "Error: " . $sql . "<br>" . $conn->error;
